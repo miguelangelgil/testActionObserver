@@ -1,10 +1,17 @@
 name: Workflow Status Notifier
 #miguelangelgil/testWORKFLOW/.github/workflows/main.yml@main
 on:
-  workflow_run:
-    workflows: ["miguelangelgil/testWORKFLOW/.github/workflows/main.yml@main"]
-    types:
-      - completed
+    workflow_call:
+        inputs:
+            WORKFLOW:
+                required: true
+                type: string
+            STATUS:
+                required: true
+                type: string
+            DETAILS:
+                required: true
+                type: string
 
 jobs:
     notify:
@@ -12,7 +19,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: notify
-          run: echo "🔔 *Workflow:* ${{ github.workflow }} \n📜 *Estado:* ${{ github.event.workflow_run.conclusion }} \n📌 *Ejecutado en:* ${{ github.event.workflow_run.head_branch }} \n🔗 *Detalles:* ${{ github.event.workflow_run.html_url }}"
+          run: echo "🔔 *Workflow:* ${{ inputs.WORKFLOW }} \n📜 *Estado:* ${{ inputs.STATUS }} \n🔗 *Detalles:* ${{ inputs.DETAILS }}"
     #   notify-slack:
 #     runs-on: ubuntu-latest
 #     steps:
