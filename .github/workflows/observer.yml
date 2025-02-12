@@ -1,8 +1,8 @@
 name: Workflow Status Notifier
-
+#miguelangelgil/testWORKFLOW/.github/workflows/main.yml@main
 on:
   workflow_run:
-    workflows: [" miguelangelgil/testWORKFLOW/.github/workflows/main.yml@main"]
+    workflows: ["testWorkflow"]
     types:
       - completed
 
