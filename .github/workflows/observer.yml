@@ -1,0 +1,26 @@
+name: Workflow Status Notifier
+
+on:
+  workflow_run:
+    workflows: [" miguelangelgil/testWORKFLOW/.github/workflows/main.yml@main"]
+    types:
+      - completed
+
+jobs:
+    notify:
+        name: notify
+        runs-on: ubuntu-latest
+        steps:
+        - name: notify
+          run: echo "🔔 *Workflow:* ${{ github.workflow }} \n📜 *Estado:* ${{ github.event.workflow_run.conclusion }} \n📌 *Ejecutado en:* ${{ github.event.workflow_run.head_branch }} \n🔗 *Detalles:* ${{ github.event.workflow_run.html_url }}"
+    #   notify-slack:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Enviar notificación a Slack
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#           SLACK_MESSAGE: "🔔 *Workflow:* ${{ github.workflow }} \n📜 *Estado:* ${{ github.event.workflow_run.conclusion }} \n📌 *Ejecutado en:* ${{ github.event.workflow_run.head_branch }} \n🔗 *Detalles:* ${{ github.event.workflow_run.html_url }}"
+#           SLACK_USERNAME: "GitHub Actions"
+#           SLACK_ICON_EMOJI: ":octocat:"
+#           SLACK_CHANNEL: "#general"  # Cambia esto por el canal donde quieres recibir notificaciones
